@@ -19,7 +19,9 @@ public class PokerHands{
 			    'Q', 'K', 'A'};
     //An arraylist made out of valids array. useful for indexof() and get()
     public static ArrayList<Character> validOrder = new ArrayList<>(Arrays.asList(valids));
-
+    //An array containing valid suits
+    public static Character[] suitsarray = {'H', 'D', 'S', ''};
+    public static ArrayList<Character> 
     public static void main(String[] args){
 	Scanner sc = new Scanner(System.in);
 	/*While user is entering data, read in data into rawHands
@@ -102,7 +104,7 @@ public class PokerHands{
 
 
     
-
+    
     /**
      * This method iterates through a given string, checking that each char in
      * the string matches a char in the validChar array
@@ -111,12 +113,7 @@ public class PokerHands{
 	char[] sCharArray = s.toCharArray();
 	for(Character c: sCharArray){
 	    boolean match = false;
-	    for(Character validChar : validOrder){
-		if(c == validChar){
-		    match = true;
-		    break;
-		}
-	    }
+	    if()
 	    if(!match){
 		return false;
 	    }
