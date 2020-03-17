@@ -79,7 +79,25 @@ public class PokerHands{
 	  Things go very wrong, but for now i think it's unnecessary*/
 	
 	int[] cardValues = new int[5];
-	for(String s)
+	for(int i = 0; i < handSplit.length; i++){
+	    booelan isDigit = handSplit[i].charAt()
+	    if(!checkValidChars(handSplit[i])){
+		return false;
+	    }
+	    for(int x = 0; x < handSplit.length; x++){
+		if(x != i){
+		    //If duplicate card is found: return false
+		    if(handSplit[i].equals(handSplit[x])){
+			return false
+		    }
+		}
+	    }
+	    //Checking that each card before this card is lower val than this card
+	    //Yeah this is very bad code but i think it'll work!
+	    for(int i = 0; i < i-1; i++){
+		if()
+	    }
+	}
     }
 
 
