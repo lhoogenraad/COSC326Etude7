@@ -16,18 +16,20 @@ public class PokerHands{
     //I'll probably redo how valid chars are held, but for now it's fine.
     //Also the order of this array represents the value of each card.
     public static Character[] valids = {'2', '3', '4', '5', '6', '7', '8', '9', 'J',
-			    'Q', 'K', 'A'};
+					'Q', 'K', 'A'};
     //An arraylist made out of valids array. useful for indexof() and get()
     public static ArrayList<Character> validOrder = new ArrayList<>(Arrays.asList(valids));
-    //An array containing valid suits
-    public static Character[] suitsarray = {'H', 'D', 'S', ''};
-    public static ArrayList<Character> 
+    //An array and ArrayList containing valid suits
+    public static Character[] suitsarray = {'H', 'D', 'S', 'C'};
+    public static ArrayList<Character> suits = new ArrayList<>(Arrays.asList(suitsarray));
+
+
     public static void main(String[] args){
 	Scanner sc = new Scanner(System.in);
 	/*While user is entering data, read in data into rawHands
 	  ArrayList, and add a toUpperCase() version of the string to the
 	  convertedHands ArrayList
-	 */
+	*/
 	while(sc.hasNextLine()){
 	    String in = sc.nextLine();
 	    rawHands.add(in);
@@ -48,11 +50,6 @@ public class PokerHands{
      * It then calls validate
      */
     private static boolean validateHand(String hand){
-	/*A valid hand can only be 14 chars long.
-	 10 chars for cards & suit types, and 4 for seperators.*/
-	if(hand.length() != 14){
-	    return false;
-	}
 	int seperators = 0;
 	String sep = "";
 	if(hand.contains("/")){
@@ -82,15 +79,21 @@ public class PokerHands{
 	
 	int[] cardValues = new int[5];
 	for(int i = 0; i < handSplit.length; i++){
-	    booelan isDigit = handSplit[i].charAt()
-	    if(!checkValidChars(handSplit[i])){
+	    /*If, by some act of god, one of the cards given is not 2 chars long return false.*/
+	    if(handSplit[i].length() != 3){
 		return false;
 	    }
+	    
+	    /*Getting the first and second chars of the given card into Character 
+	      vars, and setting a boolean valuable which determines if given card
+	      is a letter or an int*/
+	    Character c1 = handSplit.charAt(0);
+	    Character c2 = handSplit.charAt(1);
 	    for(int x = 0; x < handSplit.length; x++){
 		if(x != i){
 		    //If duplicate card is found: return false
 		    if(handSplit[i].equals(handSplit[x])){
-			return false
+			return false;
 		    }
 		}
 	    }
@@ -100,24 +103,5 @@ public class PokerHands{
 		if()
 	    }
 	}
-    }
-
-
-    
-    
-    /**
-     * This method iterates through a given string, checking that each char in
-     * the string matches a char in the validChar array
-     */
-    private static boolean checkValidChars(String s){
-	char[] sCharArray = s.toCharArray();
-	for(Character c: sCharArray){
-	    boolean match = false;
-	    if()
-	    if(!match){
-		return false;
-	    }
-	}
-	return true;
     }
 }
