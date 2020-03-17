@@ -35,6 +35,11 @@ public class PokerHands{
 	    rawHands.add(in);
 	    convertedHands.add(in.toUpperCase());
 	}
+
+	/*Converting values between 9-13 and 1 to their correct string values*/
+	for(String s : convertedHands){
+	    String cardVal = s.substring()
+	}
     }
 
     /**
@@ -79,16 +84,16 @@ public class PokerHands{
 	
 	int[] cardValues = new int[5];
 	for(int i = 0; i < handSplit.length; i++){
-	    /*If, by some act of god, one of the cards given is not 2 chars long return false.*/
-	    if(handSplit[i].length() != 3){
+	    if(handSplit[i].length() > 3 ||
+	       handSplit[i].length() < 2){
 		return false;
 	    }
 	    
 	    /*Getting the first and second chars of the given card into Character 
 	      vars, and setting a boolean valuable which determines if given card
 	      is a letter or an int*/
-	    Character c1 = handSplit.charAt(0);
-	    Character c2 = handSplit.charAt(1);
+	    String cardval = handSplit[i].substring(0, handSplit[i].length()-1);
+	    String suit = handSplit[i].substring(handSplit[i].length()-1);
 	    for(int x = 0; x < handSplit.length; x++){
 		if(x != i){
 		    //If duplicate card is found: return false
