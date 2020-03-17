@@ -36,9 +36,19 @@ public class PokerHands{
 	    convertedHands.add(in.toUpperCase());
 	}
 
-	/*Converting values between 9-13 and 1 to their correct string values*/
-	for(String s : convertedHands){
-	    String cardVal = s.substring()
+	/*Converting values between 9-13 and 1 to their correct string values
+	  This code will not perform any error checking, it simply converts any cards
+	  with values 9-13 and 1 to the correct string equiv
+	  -----------------------------------Left off here-----------------------------------
+	 */
+	for(int i = 0; i < convertedHands.size(); i++){
+	    String cardVal = convertedHands.get(i).substring(0, cardVal.length()-1);
+	    if(cardVal.length() == 2){
+		try{
+		    int cardValInt = Integer.parseInt(cardVal);
+		    if(cardVal)
+		}catch(NumberFormatException e){/*Do nothing*/}
+	    }
 	}
     }
 
