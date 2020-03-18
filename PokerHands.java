@@ -190,34 +190,30 @@ public class PokerHands{
      * based on the index of the card string in the validOrder arraylist.
      *
      * The numDeadCards int var is the number of cards that have an indexOf
-     * value in validOrder of -1
+     * value in validOrder of -1. This sorting method uses insertion sort.
+     * If indexOf == -1 then it messes up the sorting algorithm but it doesn't matter
+     * because something should be invalid and sorting the string isn't an issue at that point
      */
     public static String[] sortHand(String[] s){
 	int numDeadCards = 0;
-        for(String st:s){
-            System.out.print(s + " ");
-        }
-        System.out.println("");
         try{
             for(int i = 0; i < s.length; i++){
                 String card = s[i].substring(0, s[i].length()-1);
                 int value = validOrder.indexOf(card);
-                System.out.println(card + " value is " + value);
-                if(value < 0){
-                    String swapString = s[numDeadCards];
-                    System.out.println("Dead card found: " + swapString);
-                    s[numDeadCards] = s[i];
-                    s[i] = swapString;
-                    numDeadCards++;
-                }else{
-                    for(int x = i+1; x < s.length; x++){
-                        if(value > s[i].indexOf(s[x])){
-                            String swapString = s[x];
-                            s[x] = s[i];
-                            s[i] = swapString;
-                        }
-                    }
-                }
+     		int smallestIndex = i;
+		int smallestVal = value;
+		for(int x = i+1; x < s.length; x++){
+		    int itVal = validOrder.indexOf(s[x].substring(0, s[x].length()-1));
+		    if(itVal < smallestVal){
+			smallestVal = itVal;
+			smallestIndex = x;
+		    }
+		}
+		if(smallestIndex != i){
+		    String swap = s[smallestIndex];
+		    s[smallestIndex] = s[i];
+		    s[i] = swap;
+		}
             }
         }catch(Exception e){}
         return s;
