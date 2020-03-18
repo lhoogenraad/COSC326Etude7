@@ -59,7 +59,7 @@ public class PokerHands{
      * I always feel hacky and yuck using String.split() to check how many times a sequence appears
      * in a string, but if we're splitting by a one char seperator then it should work every time 8).
      *
-     * It then calls validate
+     * P.S. the commented out println statements are (of course) debugging code.
      */
     private static boolean validateHand(String hand){
 	int seperators = 0;
@@ -79,13 +79,13 @@ public class PokerHands{
 	/*Only one seperator should be used, so if seperators is not 1,
 	  the hand must be invalid.*/
 	if(seperators != 1){
-	    System.out.println("diff seps");
+	    //System.out.println("diff seps");
 	    return false;
 	}
 	/*Here we are sort of checking that only 4 seperators were used, in a sort of hacky way.*/
 	String[] handSplit = hand.split(sep);
         if(handSplit.length != 5){
-            System.out.println("Seperators #: " + handSplit.length);
+            //System.out.println("Seperators #: " + handSplit.length);
             return false;
         }
 	/*Could put a try{}catch(ArrayIndexOutOfBounds) exception here in case
@@ -106,7 +106,7 @@ public class PokerHands{
 	    /*Checking that cardval appears in validOrder arraylist, and that
 	      suit appears in suits arraylist*/
 	    if(!validOrder.contains(cardval) || !suits.contains(suit)){
-		System.out.println("not found in alists\tcardvalue: " + cardval + " suit: " + suit);
+		//System.out.println("not found in alists\tcardvalue: " + cardval + " suit: " + suit);
 		return false;
 	    }
 
@@ -115,7 +115,7 @@ public class PokerHands{
 		if(x != i){
 		    //If duplicate card is found: return false
 		    if(handSplit[i].equals(handSplit[x])){
-			System.out.println("duplicate found");
+			//System.out.println("duplicate found");
 			return false;
 		    }
 		}
@@ -217,5 +217,24 @@ public class PokerHands{
             }
         }catch(Exception e){}
         return s;
+    }
+
+    /**
+     * Will return an int representing how many times a sequence has occured
+     * in a given string
+     */
+    public static int occursNumTimes(String s, String targ){
+	if(!s.contains(targ)){
+	    return 0;
+	}
+	int count = 0;
+	int index = 0;
+	String st = s;
+	while(st.indexOf(targ) != -1){
+	    st = st.substring(st.indexOf(targ)+1, st.length());
+	    System.out.println(st);
+	    count++;
+	}
+	return count;
     }
 }
