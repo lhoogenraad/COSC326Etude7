@@ -84,17 +84,10 @@ public class PokerHands{
 	}
 	/*Here we are sort of checking that only 4 seperators were used, in a sort of hacky way.*/
 	String[] handSplit = hand.split(sep);
-	if(!sep.equals(" ")){
-	    if(handSplit.length != 5){
-		System.out.println("Seperators #: " + handSplit.length);
-		return false;
-	    }
-	}else{
-	    if(handSplit.length != 6){
-		System.out.println("Seperators #: " + handSplit.length);
-		return false;
-	    }
-	}
+        if(handSplit.length != 5){
+            System.out.println("Seperators #: " + handSplit.length);
+            return false;
+        }
 	/*Could put a try{}catch(ArrayIndexOutOfBounds) exception here in case
 	  Things go very wrong, but for now i think it's unnecessary*/
 	
@@ -102,7 +95,6 @@ public class PokerHands{
 	for(int i = 0; i < handSplit.length; i++){
 	    if(handSplit[i].length() > 3 ||
 	       handSplit[i].length() < 2){
-		System.out.println("invalid card len");
 		return false;
 	    }
 	    
@@ -114,7 +106,7 @@ public class PokerHands{
 	    /*Checking that cardval appears in validOrder arraylist, and that
 	      suit appears in suits arraylist*/
 	    if(!validOrder.contains(cardval) || !suits.contains(suit)){
-		System.out.println("not found in alists: " + cardval + " suit: " + suit);
+		System.out.println("not found in alists\tcardvalue: " + cardval + " suit: " + suit);
 		return false;
 	    }
 
@@ -161,34 +153,35 @@ public class PokerHands{
 	    for(int i = 0; i < split.length; i++){
 		String cardVal = split[i].substring(0, split[i].length()-1);
 		if(cardVal.equals("1")){
-		    returnString += "A" + split[i].substring(split[i].length()-1) + sep;
+		    returnString += "A" + split[i].substring(split[i].length()-1) + " ";
 		}
 		/*Here we are converting corresponding ints to 'royal' card
 		  values*/
-		if(cardVal.equals("11")){
-		    returnString += "J" + split[i].substring(split[i].length()-1) + sep;
+		else if(cardVal.equals("11")){
+		    returnString += "J" + split[i].substring(split[i].length()-1) + " ";
 		}else if(cardVal.equals("12")){
-		    returnString += "Q" + split[i].substring(split[i].length()-1) + sep;
+		    returnString += "Q" + split[i].substring(split[i].length()-1) + " ";
 		}else if(cardVal.equals("13")){
-		    returnString += "K" + split[i].substring(split[i].length()-1) + sep;
+		    returnString += "K" + split[i].substring(split[i].length()-1) + " ";
 		}else{
 		    if(i < split.length-1){
-			returnString += split[i] + sep;
+			returnString += split[i] + " ";
 		    }else{
 			returnString += split[i];
 		    }
 		}
 	    }
-	}catch(NumberFormatException e){/*Do nothing*/}
-	split = sortHand(returnString.split(sep));
+	}catch(Exception e){/*Do nothing*/}
+        //System.out.println("Unsorted hand: " + returnString);
+	split = sortHand(returnString.split(" "));
 	returnString = "";
 	for(String str:split){
-	    returnString += str + sep;
+	    returnString += str + " ";
 	}
 	//This return basically cuts the last char off of the return string, which would always
 	//be the seperator.
-	System.out.println(returnString.substring(0, returnString.length()-1));
-	return returnString.substring(0,returnString.length()-1);
+	//System.out.println("Sorted hand: " + returnString.substring(0, returnString.length()-1));
+	return returnString.substring(0,returnString.length());
     }
     
     
@@ -201,24 +194,32 @@ public class PokerHands{
      */
     public static String[] sortHand(String[] s){
 	int numDeadCards = 0;
-	for(int i = 0; i < s.length; i++){
-	    String card = s[i].substring(0, s[i].length()-1);
-	    int value = validOrder.indexOf(card);
-	    if(value < 0){
-		String swapString = s[numDeadCards];
-		s[numDeadCards] = s[i];
-		s[i] = swapString;
-		numDeadCards++;
-	    }else{
-		for(int x = i+1; x < s.length; x++){
-		    if(value < s[i].indexOf(s[x])){
-			String swapString = s[x];
-			s[x] = s[i];
-			s[i] = swapString;
-		    }
-		}
-	    }
-	}
-	return s;
+        for(String st:s){
+            System.out.print(s + " ");
+        }
+        System.out.println("");
+        try{
+            for(int i = 0; i < s.length; i++){
+                String card = s[i].substring(0, s[i].length()-1);
+                int value = validOrder.indexOf(card);
+                System.out.println(card + " value is " + value);
+                if(value < 0){
+                    String swapString = s[numDeadCards];
+                    System.out.println("Dead card found: " + swapString);
+                    s[numDeadCards] = s[i];
+                    s[i] = swapString;
+                    numDeadCards++;
+                }else{
+                    for(int x = i+1; x < s.length; x++){
+                        if(value > s[i].indexOf(s[x])){
+                            String swapString = s[x];
+                            s[x] = s[i];
+                            s[i] = swapString;
+                        }
+                    }
+                }
+            }
+        }catch(Exception e){}
+        return s;
     }
 }
