@@ -195,14 +195,12 @@ public class PokerHands{
      * because something should be invalid and sorting the string isn't an issue at that point
      */
     public static String[] sortHand(String[] s){
-	int numDeadCards = 0;
         try{
             for(int i = 1; i < s.length; i++){
 		int j = i;
 		String key = s[i];
-                String card = s[i].substring(0, s[i].length()-1);
-                int value = getValue(card);
-		while(j > s.length && getValue(s[j-1]) > value){
+                int value = getValue(key);
+		while(j > 0 && getValue(s[j-1]) > value){
 		    String swap = s[j];
 		    s[j] = s[j-1];
 		    s[j-1] = swap;
@@ -210,7 +208,7 @@ public class PokerHands{
 		}
 		s[j] = key;
             }
-        }catch(Exception e){}
+        }catch(Exception e){/*Do nothing, tbh don't think i need this here but it's nice to have*/}
         return s;
     }
 
