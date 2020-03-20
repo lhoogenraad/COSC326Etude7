@@ -197,23 +197,18 @@ public class PokerHands{
     public static String[] sortHand(String[] s){
 	int numDeadCards = 0;
         try{
-            for(int i = 0; i < s.length; i++){
+            for(int i = 1; i < s.length; i++){
+		int j = i;
+		String key = s[i];
                 String card = s[i].substring(0, s[i].length()-1);
-                int value = validOrder.indexOf(card);
-     		int smallestIndex = i;
-		int smallestVal = value;
-		for(int x = i+1; x < s.length; x++){
-		    int itVal = validOrder.indexOf(s[x].substring(0, s[x].length()-1));
-		    if(itVal < smallestVal){
-			smallestVal = itVal;
-			smallestIndex = x;
-		    }
+                int value = getValue(card);
+		while(j > s.length && getValue(s[j-1]) > value){
+		    String swap = s[j];
+		    s[j] = s[j-1];
+		    s[j-1] = swap;
+		    j--;
 		}
-		if(smallestIndex != i && smallestVal <= value){
-		    String swap = s[smallestIndex];
-		    s[smallestIndex] = s[i];
-		    s[i] = swap;
-		}
+		s[j] = key;
             }
         }catch(Exception e){}
         return s;
@@ -236,5 +231,14 @@ public class PokerHands{
 	    count++;
 	}
 	return count;
+    }
+
+
+    /**
+     * This method will return the value of a given card (with suit)
+     * It will either return the value, or -1 if it is invalid
+     */
+    public static int getValue(String s){
+	return validOrder.indexOf(s.substring(0, s.length()-1));
     }
 }
