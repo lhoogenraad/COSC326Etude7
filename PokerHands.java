@@ -209,7 +209,7 @@ public class PokerHands{
 			smallestIndex = x;
 		    }
 		}
-		if(smallestIndex != i){
+		if(smallestIndex != i && smallestVal != value){
 		    String swap = s[smallestIndex];
 		    s[smallestIndex] = s[i];
 		    s[i] = swap;
