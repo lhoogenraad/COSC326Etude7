@@ -1,8 +1,3 @@
-3D-5D-KC-13S-Ad
-6s/3d/KC/13S/Ad
-13d 12d 11s 1c 5s
-1d-12c-1s-9d-5h
-13d 12d 11s 4c 5s
-1c-AD-as-Ks-13c
-Ad/5D/Kc/11S/1c
-5D 3S 6D 5S 5H
+12d 12h 12C 12S 1D
+KS 13h 12H Qs Ad
+Ks-aH-10s-9H-9d

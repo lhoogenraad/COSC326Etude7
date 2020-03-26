@@ -20,7 +20,7 @@ public class PokerHands{
     //An arraylist made out of valids array. useful for indexof() and get()
     public static ArrayList<String> validOrder = new ArrayList<>(Arrays.asList(valids));
     //An array and ArrayList containing valid suits
-    public static String[] suitsarray = {"H", "D", "S", "C"};
+    public static String[] suitsarray = {"C", "D", "H", "S"};
     public static ArrayList<String> suits = new ArrayList<>(Arrays.asList(suitsarray));
 
 
@@ -209,6 +209,7 @@ public class PokerHands{
 		s[j] = key;
             }
         }catch(Exception e){/*Do nothing, tbh don't think i need this here but it's nice to have*/}
+	sortSuits(s);
         return s;
     }
 
@@ -231,7 +232,44 @@ public class PokerHands{
 	return count;
     }
 
-
+    /**
+     * This function will sort a given array of cards based on their suits.
+     * It should only sort based on suits when duplicate values are found.
+     */
+    public static String[] sortSuits(String[] s){
+	try{
+	    for(int i = 0; i < s.length; i++){
+		int x = i;
+		int currVal = getValue(s[i]);
+		/*
+		  Here we find at what index duplicates stop.
+		*/
+		while(x < s.length && getValue(s[x]) == currVal){
+		    x++;
+		}
+		/*
+		  This code is for sorting the duplicate values up till index x
+		*/
+		if(x != i){
+		    for(int y = i; y < x; y++){
+			//Value of suit
+			int yval = suits.indexOf(s[y].substring(s[y].length()-1));
+			for(int z = i+1; z < x; z++){
+			    int zval = suits.indexOf(s[z].substring(s[z].length()-1));
+			    if(zval < yval){
+				String temp = s[z];
+				s[z] = s[y];
+				s[y] = temp;
+			    }
+			}
+		    }
+		}
+	    }
+	}catch(Exception e){/*Do nothing*/}
+	return s;
+    }
+    
+    
     /**
      * This method will return the value of a given card (with suit)
      * It will either return the value, or -1 if it is invalid
